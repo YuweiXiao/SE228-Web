@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    	<property name="connection.username">root</property>
+    	 
+    	<property name="connection.password">Alpha.1105</property>
+    	<property name="connection.url">jdbc:mysql:///bookstore</property>
+    	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    	<property name="dialect">org.hibernate.dialect.MySQLDialect</property> 
+    	
+    	<property name="show_sql">true</property>
+    	<property name="format_sql">true</property>
+    	
+		<property name="hibernate.current_session_context_class">thread</property>    	
+    	
+    	<mapping resource="entity/User.hbm.xml"/>
+    	<mapping resource="entity/Role.hbm.xml"/>
+    	<mapping resource="entity/Order.hbm.xml"/>
+    	<mapping resource="entity/Book.hbm.xml"/>
+    	<mapping resource="entity/Category.hbm.xml"/>
+    	<!-- <mapping class="entity.OrderAssociation"/> -->
+    </session-factory>
+</hibernate-configuration>
+
+
+
+    	<!-- <property name="connection.username">adminh4Yll4w</property> -->
+    	
+    	<!-- <property name="connection.password">pUEa7_eljhst</property -->
+<!--     	<property name="connection.url">jdbc:mysql://127.2.171.130:3306/bookstore</property> -->

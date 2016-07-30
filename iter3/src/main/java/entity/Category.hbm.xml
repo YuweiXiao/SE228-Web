@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- Generated May 4, 2016 2:04:43 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+<class name="entity.Category" table="CATEGORY">
+
+	<id  name="categoryID" type="int" >
+		<column name="CATEGORYID" />
+	    	<generator class="native" />
+    </id>
+
+    <property name="name" type="java.lang.String" >
+		<column name="NAME" />
+  	</property>
+  	
+  	<set name="books" cascade="save-update" table="bookscategory" inverse = "true">
+       	<key>
+       		<column name="categoryID"></column>
+       	</key>
+       	<many-to-many class="entity.Book" column="bookID"></many-to-many>
+    </set>
+</class>
+
+</hibernate-mapping>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 13, 2016 9:22:38 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="entity.Book" table="BOOKS">
+        <id name="bookID" type="int" access="field">
+            <column name="BOOKID" />
+            <generator class="native" />
+        </id>
+        <property name="isbn" type="java.lang.String">
+            <column name="ISBN" />
+        </property>
+        <property name="title" type="java.lang.String">
+            <column name="TITLE" />
+        </property>
+        <property name="press" type="java.lang.String">
+            <column name="PRESS" />
+        </property>
+        <property name="author" type="java.lang.String">
+            <column name="AUTHOR" />
+        </property>
+        <property name="price" type="int">
+            <column name="PRICE" />
+        </property>
+        <property name="inventory" type="int">
+            <column name="INVENTORY" />
+        </property>
+        <property name="soldAmount" type="int">
+            <column name="SALES" />
+        </property>
+        <property name="imageID" type="java.lang.String">
+            <column name="IMAGEID" />
+        </property>
+        <set name="category" cascade="all" table="bookscategory" inverse="false">
+        	<key>
+        		<column name="bookID"></column>
+        	</key>
+        	<many-to-many class="entity.Category" column="categoryID"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

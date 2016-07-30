@@ -1,0 +1,106 @@
+.boxing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .heading {
+  margin-bottom: 10px;
+  text-align: center;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, Tahoma, sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: block;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #f5f5f5;
+  border-right: 1px solid #eee;
+}
+#tt {
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 400px;
+}
+.content-wrapper {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 24px;
+  padding: 30px 30px;
+  background-color: #fff;
+  border: 1px solid #95B8E7;
+}
+.content-wrapper th,
+.content-wrapper tr {
+  text-align: center;
+}
+.content-wrapper ul {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  padding-left: 0px;
+}
+.content-wrapper li {
+  float: left;
+  margin-right: 5%;
+  list-style-type: none;
+}
+.modify {
+  display: none;
+}
+#tip {
+  font-weight: bold;
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  display: none;
+  z-index: 9999;
+}
+#fm {
+  margin: 0;
+  padding: 10px 30px;
+}
+.ftitle {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.fitem {
+  margin-bottom: 5px;
+}
+.fitem label {
+  display: inline-block;
+  width: 80px;
+}
+.fitem input {
+  width: 160px;
+}

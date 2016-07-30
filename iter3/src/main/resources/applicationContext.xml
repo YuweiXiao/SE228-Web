@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    	http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+	<!-- security configuration -->
+	<!-- <bean id="myLoginManager" class="auth.MyLoginManager"></bean>
+	
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="myLoginManager">
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<bean id="myAuthenticationEntryPoint" class="auth.MyAuthenticationEntryPoint">
+		<property name="loginPage" value="/auth/action_login"></property>
+	</bean>
+
+	<bean id="accessDeniedHandler" class="auth.MyAccessDeniedHandler">
+		<property name="errorPage" value="/403error"></property>
+	</bean>
+
+	<security:http auto-config="true" use-expressions="true"
+		entry-point-ref="myAuthenticationEntryPoint">
+
+		<security:access-denied-handler ref="accessDeniedHandler" />
+
+		<security:intercept-url pattern="/admin/*"
+			access="hasRole('ROLE_ADMIN')" />
+
+		<security:intercept-url pattern="/page/logout*"
+			access="permitAll"></security:intercept-url>
+
+		<security:form-login default-target-url="/login.jsp"
+			authentication-failure-url="/index"
+			always-use-default-target="true"></security:form-login>
+
+		<security:csrf disabled="true" />
+	</security:http> -->
+
+	<!--注解支持  -->     
+    <context:annotation-config />
+    <!--让Spring扫描的包  -->
+    <context:component-scan base-package="action*"/>
+	
+
+	
+	<bean id="mongoDBManager" class="util.MongoDBManager">
+		<property name="hostname" value="localhost"></property>
+		<property name="port" value="27017"></property>
+		<property name="database" value="bookstore"></property>
+	</bean>
+
+    			<!-- sessionFactory configuration -->
+    
+ 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+        destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/bookstore" />
+        <property name="username" value="root" />
+        <property name="password" value="Alpha.1105" />
+    </bean>
+ 
+ 	<bean id="sessionFactory"
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:hibernate.cfg.xml" />
+    </bean>
+    
+ 	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<tx:annotation-driven />
+ 				<!-- DAO configuration -->
+ 	
+    <bean id="BookDao" class="dao.BookDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="UserDao" class="dao.UserDao">
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+ 
+ 	<bean id="OrderDao" class="dao.OrderDao">
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="RoleDao" class="dao.RoleDao">
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="CategoryDao" class="dao.CategoryDao">
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+ 
+ 				<!-- service configuration -->
+ 
+ 	<bean id="BookService" class="service.impl.BookServiceImpl">
+		<property name="bookDao" ref="BookDao" />
+		<property name="categoryDao" ref="CategoryDao"></property>
+    </bean>
+    
+    <bean id="CartService" class="service.impl.CartServiceImpl">
+		<property name="bookDao" ref="BookDao" />
+    </bean>
+ 	
+ 	<bean id="OrderService" class="service.impl.OrderServiceImpl">
+		<property name="orderDao" ref="OrderDao" />
+    </bean>
+    
+ 	<bean id="AnalysisService" class="service.impl.AnalysisServiceImpl">
+		<property name="orderDao" ref="OrderDao" />
+    </bean>
+ 
+ 	<bean id="UserService" class="service.impl.UserServiceImpl">
+		<property name="userDao" ref="UserDao" />
+		<property name="roleDao" ref="RoleDao" />
+		<property name="mongo" ref="mongoDBManager"></property>
+    </bean>
+    
+    <bean id="AuthService" class="service.impl.AuthServiceImpl">
+		<property name="userDao" ref="UserDao" />
+		<property name="roleDao" ref="RoleDao" />
+    </bean>
+    
+ 				<!-- Action configuration -->
+    <!-- <bean id="AuthAction" class="action.AuthAction" scope="prototype">
+    	<property name="userDao" ref="UserDao"></property>
+    	<property name="roleDao" ref="RoleDao"></property>
+    </bean> -->
+    
+</beans>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 13, 2016 9:47:46 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="entity.Order" table="ORDERS">
+        <id name="orderID" type="int">
+            <column name="ORDERID" />
+            <generator class="native" />
+        </id>
+        
+        <many-to-one name="user" class="entity.User" fetch="join" lazy="false">
+            <column name="USERID" />
+        </many-to-one>
+        
+        <property name="orderTime" type="java.sql.Timestamp">
+            <column name="ORDERTIME" />
+        </property>
+        
+        <property name="isDeal" type="char">
+            <column name="ISDEAL" />
+        </property>
+        
+        <property name="totalPrice" type="int">
+            <column name="TOTALPRICE" />
+        </property>
+<!--         <set name="books" >
+        	<key column="orderID"></key>
+        	<one-to-many class="entity.OrderAssociation"></one-to-many>
+        </set> -->
+        
+        <set name="books" table="ORDERSBOOK" fetch="join" lazy="false">  
+         	<key column="ORDERID" not-null="true"/>  
+         	<composite-element class="entity.OrdersBook">
+         		<many-to-one name="book" class="entity.Book" fetch="join" lazy="false">
+         			<column name="BOOKID"></column>
+         		</many-to-one>  
+            	<property name="amount" column="AMOUNT"/>    
+         	</composite-element>  
+       	</set>  
+    </class>
+</hibernate-mapping>
+
+

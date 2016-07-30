@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 13, 2016 4:07:46 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="entity.User" table="USERS">
+  <id name="userID" type="int">
+   <column name="USERID"/>
+   <generator class="native"/>
+  </id>
+  <property generated="never" lazy="false" name="username" type="java.lang.String">
+   <column name="USERNAME"/>
+  </property>
+  <property generated="never" lazy="false" name="password" type="java.lang.String">
+   <column name="PASSWORD"/>
+  </property>
+  <property generated="never" lazy="false" name="name" type="java.lang.String">
+   <column name="NAME"/>
+  </property>
+  <property generated="never" lazy="false" name="profileID" type="java.lang.String">
+   <column name="PROFILEID"/>
+  </property>
+  
+  <many-to-one cascade="none" class="entity.Role" fetch="join" lazy="false" name="role">
+  	<column name="roleID" not-null="true"/>
+  </many-to-one>
+
+ </class>
+</hibernate-mapping>
